@@ -38,16 +38,16 @@ class UiController {
     onMovementKeyDown(key) {
         switch (key) {
             case "ArrowRight" :
-                    this._entities.pacman.move(Direction.EAST);
+                this._entities.forEach((entity, i) => entity.move(Direction.EAST));
                 break;
             case "ArrowLeft" :
-                    this._entities.pacman.move(Direction.WEST);
+                    this._entities.forEach((entity, i) => entity.move(Direction.WEST));
                 break;
             case "ArrowUp" :
-                    this._entities.pacman.move(Direction.NORTH);
+                this._entities.forEach((entity, i) => entity.move(Direction.NORTH));
                 break;
             case "ArrowDown" :
-                    this._entities.pacman.move(Direction.SOUTH);
+                this._entities.forEach((entity, i) => entity.move(Direction.SOUTH));
                 break;
             default :
                 break;

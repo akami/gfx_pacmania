@@ -30,6 +30,7 @@ function main(sources) {
     // set up moving-entities
     let pacman = new Pacman(context, sources[0], sources[1]);
     let labyrinth = new Labyrinth(context, [0.0, 0.0, 0.0] ,[1.0, 1.0, 1.0], HORIZONTAL_INNER_WALLS, VERTICAL_INNER_WALLS);
+    let camera = new Camera(context, PACMAN_POSITION);
 
     // set up shape array to render;
     const shapes = [];
@@ -42,9 +43,7 @@ function main(sources) {
     const renderController = new RenderController(context, shapes);
 
     // set up ui controller
-    const uiController = new UiController({
-        pacman: pacman
-    });
+    const uiController = new UiController([pacman, camera]);
 
     // set up event listeners for user interaction
     document.addEventListener('keydown', (event) => {

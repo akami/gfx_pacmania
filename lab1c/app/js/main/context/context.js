@@ -15,10 +15,6 @@ const FIELD_OF_VIEW = glMatrix.toRadian(45);
 const FRUSTRUM_NEAR = 0.1;
 const FRUSTRUM_FAR = 100;
 
-const CAMERA_POSITION = [ 2., 15., 15.];
-const CAMERA_FOCUS = PACMAN_POSITION;
-const CAMERA_UP = [0, 1, 0];
-
 // light constants
 const POINT_LIGHT_POSITION = [0.0, 25.0, 0.0];
 
@@ -60,7 +56,6 @@ class Context {
         this._pointLightSource = new PointLight();
 
         // set up coordinate systems
-        this.initViewSpace();
         this.initClipSpace();
     }
 
@@ -92,31 +87,6 @@ class Context {
 
         // clear canvas
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    }
-
-    /**
-     * The setUpViewSpace() function is responsible for setting up the "View Space", this essentially corresponds to the
-     * view coordinate system. Using the view matrix, the world (a.k.a the objects in it) is translated to be in front
-     * of the camera, to be looked at "from the perspective of the user". To achieve this, we use following constants
-     * that are defined in the context-constants.js file:
-     *
-     * <ul>
-     *     <li> CAMERA_POSITION: The location of the camera in the world </li>
-     *     <li> CAMERA_FOCUS: Where the camera "points" to </li>
-     *     <li> CAMERA_UP: which direction is up (usually positive y) </li>
-     * </ul>
-     *
-     * @see CAMERA_POSITION
-     * @see CAMERA_FOCUS
-     * @see CAMERA_UP
-     */
-    initViewSpace() {
-        mat4.lookAt(
-            this._viewMatrix,
-            CAMERA_POSITION,
-            CAMERA_FOCUS,
-            CAMERA_UP
-        );
     }
 
     initClipSpace() {
