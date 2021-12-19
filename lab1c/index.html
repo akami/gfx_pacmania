@@ -1,0 +1,77 @@
+<!-- @module Foundations of Computer Graphics
+  -- @author Katharina Hoeckner
+  -- 01638800
+  -- WS2021
+  -- University of Vienna
+  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GFX WS 2021 - lab1b</title>
+
+    <!-- CSS to display the WebGL canvas in full size -->
+    <link rel="stylesheet" href="app/css/styles/main.css">
+</head>
+
+<body onload="start();">
+<div class="container">
+    <canvas id="lab1c-canvas" height="800" width="800">
+        Your browser does not support the HTML 5 Canvas.
+    </canvas>
+    <div id="text-overlay">
+        <div>
+            <span id="shader"></span>
+        </div>
+    </div>
+</div>
+
+<!-- shaders -->
+<script src="app/js/main/shader/shader-program.js"></script>
+
+<script src="app/js/main/shader/phong-shader/shader-sources/phong-fragment-shader-source.js"></script>
+<script src="app/js/main/shader/phong-shader/shader-sources/phong-vertex-shader-source.js"></script>
+
+<script src="app/js/main/shader/phong-shader/phong-shader-program.js"></script>
+
+<!-- lib -->
+<script src="app/js/lib/gl-matrix-min.js"></script>
+<script src="app/js/main/context/constants/context-constants.js"></script>
+
+<!-- utils -->
+<script src="app/js/utils/color-utils.js"></script>
+<script src="app/js/utils/transformation-utils.js"></script>
+
+<!-- context -->
+<script src="app/js/main/context/context.js"></script>
+
+<!-- constants -->
+<script src="app/js/main/models/entities/static-entities/labyrinth/constants/labyrinth-constants.js"></script>
+
+<!-- constructed-shapes -->
+<script src="app/js/main/models/shapes/shape.js"></script>
+
+<script src="app/js/main/models/shapes/loaded-shapes/wavefront-model.js"></script>
+
+<script src="app/js/main/models/shapes/constructed-shapes/plane.js"></script>
+<script src="app/js/main/models/shapes/constructed-shapes/wall.js"></script>
+
+<!-- moving-entities -->
+<script src="app/js/main/models/entities/moving-entities/direction.js"></script>
+<script src="app/js/main/models/entities/entity.js"></script>
+<script src="app/js/main/models/entities/static-entities/labyrinth/labyrinth.js"></script>
+<script src="app/js/main/models/entities/moving-entities/pacman.js"></script>
+
+<!-- light -->
+<script src="app/js/main/models/light/point-light.js"></script>
+
+<!-- controller -->
+<script src="app/js/main/controller/render-controller.js"></script>
+<script src="app/js/main/controller/ui-controller.js"></script>
+<script src="app/js/main/controller/entity-controllers/pacman-controller.js"></script>
+
+<!-- app -->
+<script src="app/js/main/main.js"></script>
+
+</body>
+</html>
