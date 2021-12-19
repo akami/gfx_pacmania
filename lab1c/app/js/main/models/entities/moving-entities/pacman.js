@@ -1,4 +1,6 @@
-const PACMAN_COLOR = [1, 0.866, 0];
+const PACMAN_COLOR = [1., 0.866, 0.];
+const PACMAN_POSITION = [2., 1., 0.];
+
 class Pacman extends Entity {
     constructor(context, pacmanTopSource, pacmanBottomSource) {
         super(context);
@@ -15,13 +17,13 @@ class Pacman extends Entity {
     }
 
     createPacman() {
-        let pacmanTop = new WavefrontModel(this._context, [2, 1, 0], {
+        let pacmanTop = new WavefrontModel(this._context, PACMAN_POSITION, {
             color: PACMAN_COLOR,
             source: this._pacmanTopSource,
             scale: 1
         });
 
-        let pacmanBottom = new WavefrontModel(this._context, [2, 1, 0], {
+        let pacmanBottom = new WavefrontModel(this._context, PACMAN_POSITION, {
             color: PACMAN_COLOR,
             source: this._pacmanBottomSource,
             scale: 1

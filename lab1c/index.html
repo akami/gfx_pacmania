@@ -15,15 +15,10 @@
 </head>
 
 <body onload="start();">
-<div class="container">
-    <canvas id="lab1c-canvas" height="800" width="800">
+<div class="center">
+    <canvas id="lab1c-canvas" width="1600px" height="800px">
         Your browser does not support the HTML 5 Canvas.
     </canvas>
-    <div id="text-overlay">
-        <div>
-            <span id="shader"></span>
-        </div>
-    </div>
 </div>
 
 <!-- shaders -->
@@ -36,11 +31,16 @@
 
 <!-- lib -->
 <script src="app/js/lib/gl-matrix-min.js"></script>
-<script src="app/js/main/context/constants/context-constants.js"></script>
 
 <!-- utils -->
 <script src="app/js/utils/color-utils.js"></script>
 <script src="app/js/utils/transformation-utils.js"></script>
+
+<!-- moving-entities -->
+<script src="app/js/main/models/entities/moving-entities/direction.js"></script>
+<script src="app/js/main/models/entities/entity.js"></script>
+<script src="app/js/main/models/entities/static-entities/labyrinth/labyrinth.js"></script>
+<script src="app/js/main/models/entities/moving-entities/pacman.js"></script>
 
 <!-- context -->
 <script src="app/js/main/context/context.js"></script>
@@ -56,14 +56,8 @@
 <script src="app/js/main/models/shapes/constructed-shapes/plane.js"></script>
 <script src="app/js/main/models/shapes/constructed-shapes/wall.js"></script>
 
-<!-- moving-entities -->
-<script src="app/js/main/models/entities/moving-entities/direction.js"></script>
-<script src="app/js/main/models/entities/entity.js"></script>
-<script src="app/js/main/models/entities/static-entities/labyrinth/labyrinth.js"></script>
-<script src="app/js/main/models/entities/moving-entities/pacman.js"></script>
-
 <!-- light -->
-<script src="app/js/main/models/light/point-light.js"></script>
+<script src="app/js/main/models/entities/static-entities/light/point-light.js"></script>
 
 <!-- controller -->
 <script src="app/js/main/controller/render-controller.js"></script>

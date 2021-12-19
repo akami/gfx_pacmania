@@ -6,6 +6,37 @@
  * University of Vienna
  */
 
+// context constants
+let ASPECT_RATIO;
+const BACKGROUND_COLOR = [0.043, 0.074, 0.168, 1.0];
+
+// perspective constants
+const FIELD_OF_VIEW = glMatrix.toRadian(45);
+const FRUSTRUM_NEAR = 0.1;
+const FRUSTRUM_FAR = 100;
+
+const CAMERA_POSITION = [ 2., 15., 15.];
+const CAMERA_FOCUS = PACMAN_POSITION;
+const CAMERA_UP = [0, 1, 0];
+
+// light constants
+const POINT_LIGHT_POSITION = [0.0, 25.0, 0.0];
+
+const AMBIENT_LIGHT_COMPONENT = [0.5, 0.5, 0.5];
+const MATERIAL_AMBIENT = [1.0, 1.0, 1.0];
+
+const DIFFUSE_LIGHT_COMPONENT = [1.0, 1.0, 1.0];
+const MATERIAL_DIFFUSE = [1.0, 1.0, 1.0];
+
+const SPECULAR_LIGHT_COMPONENT = [1.0, 1.0, 1.0];
+const SPECULAR_MATERIAL = [1.0, 1.0, 1.0];
+
+// shininess
+const SHININESS = 100;
+
+// translation constants
+const MOVEMENT_SPEED = 0.5;
+
 /**
  * The Context class can be seen as a definition of the WebGL context. It also holds all the relevant information that
  * we need for using WebGL. It sets up the canvas, the shader-sources(s), the matrices, the coordinate systems as well as the light.
@@ -13,6 +44,7 @@
 class Context {
     constructor(canvas) {
         // set up canvas
+        this._canvas = canvas;
         this._gl = canvas.getContext('webgl');
         this.initCanvas();
 
@@ -48,12 +80,7 @@ class Context {
         let gl = this._gl;
 
         // set dimensions of canvas/viewport
-        gl.canvas.width = window.innerWidth;
-        gl.canvas.height = window.innerHeight;
-
         gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-
-        ASPECT_RATIO = gl.canvas.width / gl.canvas.height;
 
         // clear color and depth
         gl.clearColor(BACKGROUND_COLOR[0], BACKGROUND_COLOR[1], BACKGROUND_COLOR[2], BACKGROUND_COLOR[3]);
@@ -92,23 +119,26 @@ class Context {
         );
     }
 
-    /**
-     * This function is responsible for setting up the clip space. The clip space can be seen as the canvas. Our created
-     * 3D world is projected onto the 2D screen using the projection matrix. In this case, a perspective projection is
-     * used. We use following constants that are defined in the context-constants.js file:
-     *
-     * @see FIELD_OF_VIEW
-     * @see ASPECT_RATIO
-     * @see FRUSTRUM_NEAR
-     * @see FRUSTRUM_FAR
-     */
     initClipSpace() {
-        mat4.perspective(
+        mat4.ortho(
             this._projectionMatrix,
-            FIELD_OF_VIEW,
-            ASPECT_RATIO,
+            -10.0, 20.0,
+            -10.0, 10.0,
             FRUSTRUM_NEAR,
             FRUSTRUM_FAR
         );
-    };
+
+        let angle = 10;
+        let shear1 = glMatrix.toRadian(angle);
+
+        let shearMatrix = [
+                1, 0, 0, 0,
+                shear1, 1, 0, 0,
+            -shear1, 0, 1, 0,
+                0, 0, 0, 1
+        ];
+
+
+        mat4.multiply(this._projectionMatrix, this._projectionMatrix, shearMatrix);
+    }
 }
