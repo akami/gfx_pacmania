@@ -8,6 +8,11 @@ class PacmanController {
         this.rotateFace(direction);
     }
 
+    animateMouth(isMouthOpen) {
+        isMouthOpen ? this.closeMouth() : this.openMouth();
+    }
+
+
     movePacman(direction) {
         const {move} = TransformationUtils;
 
@@ -44,7 +49,19 @@ class PacmanController {
     rotateFace(direction) {
         let zRotation = direction - this._pacman._faceDirection;
 
+        let wasMouthOpen = this._pacman._mouthOpen;
+
+        if(wasMouthOpen) {
+            this.animateMouth(this._pacman._mouthOpen)
+            this._pacman._mouthOpen = false;
+        }
+
         this.updatePacmanFaceDirection(zRotation, direction);
+
+        if(wasMouthOpen) {
+            this.animateMouth(this._pacman._mouthOpen)
+            this._pacman._mouthOpen = true;
+        }
     }
 
     updatePacmanFaceDirection(zRotation, faceDirection) {
@@ -55,5 +72,36 @@ class PacmanController {
         this._pacman._shapes.forEach((shape, i) => {
             rotate(shape._rotationMatrix, 0, 0, zRotation);
         });
+    }
+
+    /**
+     * Closing the mouth of pacman means rotating the top half of pacman about the x axis by 45 degrees,
+     * and the bottom half of pacman by -45 degrees.
+     */
+    closeMouth() {
+        const {rotate} = TransformationUtils;
+
+        let xRotation = 45;
+
+        // rotate top half of pacman
+        rotate(this._pacman._shapes[0]._rotationMatrix, xRotation, 0, 0);
+
+        // rotate bottom half of pacman
+        rotate(this._pacman._shapes[1]._rotationMatrix, -xRotation, 0, 0);
+    }
+
+    /**
+     * reverse operation of closing the mouth
+     */
+    openMouth() {
+        const {rotate} = TransformationUtils;
+
+        let xRotation = 45;
+
+        // rotate top half of pacman
+        rotate(this._pacman._shapes[0]._rotationMatrix, -xRotation, 0, 0);
+
+        // rotate bottom half of pacman
+        rotate(this._pacman._shapes[1]._rotationMatrix, xRotation, 0, 0);
     }
 }

@@ -9,6 +9,7 @@ class Pacman extends Entity {
         this._pacmanController = new PacmanController(this);
 
         this._faceDirection = Direction.SOUTH;
+        this._mouthOpen = false;
 
         this.createPacman();
     }
@@ -44,6 +45,9 @@ class Pacman extends Entity {
     }
 
     move(direction) {
-        this._pacmanController.move(direction)
+        this._pacmanController.move(direction);
+
+        this._pacmanController.animateMouth(this._mouthOpen);
+        this._mouthOpen = !this._mouthOpen;
     }
 }
