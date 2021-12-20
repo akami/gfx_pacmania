@@ -38,16 +38,16 @@ class UiController {
     onMovementKeyDown(key) {
         switch (key) {
             case "ArrowRight" :
-                this._gameController.moveControllableEntities(Direction.EAST);
+                this._gameController.changeDirection(Direction.EAST);
                 break;
             case "ArrowLeft" :
-                this._gameController.moveControllableEntities(Direction.WEST);
+                this._gameController.changeDirection(Direction.WEST);
                 break;
             case "ArrowUp" :
-                this._gameController.moveControllableEntities(Direction.NORTH);
+                this._gameController.changeDirection(Direction.NORTH);
                 break;
             case "ArrowDown" :
-                this._gameController.moveControllableEntities(Direction.SOUTH);
+                this._gameController.changeDirection(Direction.SOUTH);
                 break;
             default :
                 break;

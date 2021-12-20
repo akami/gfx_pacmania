@@ -43,7 +43,7 @@ function main(sources) {
     const renderController = new RenderController(context, shapes);
 
     // set up gameController that controls all entities in the game
-    const gameController = new GameController({
+    const gameController = new GameController(renderController, {
         pacman: pacman,
         camera: camera,
         labyrinth: labyrinth
@@ -57,6 +57,6 @@ function main(sources) {
         uiController.onKeyDown(event);
     }, false);
 
-    // trigger first render
-    renderController.render();
+    // trigger first tick
+    gameController.tick();
 }

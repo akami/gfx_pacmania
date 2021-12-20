@@ -42,11 +42,6 @@ class RenderController {
         this._shapes.forEach((shape) => {
             this.renderShape(shape);
         });
-
-        // trigger endless render loop
-        requestAnimationFrame(() => {
-            this.render();
-        });
     }
 
     setModelViewProjectionMatricesUniforms() {

@@ -12,7 +12,7 @@ class Pacman extends Entity {
         this._pacmanTopSource = pacmanTopSource;
         this._pacmanBottomSource = pacmanBottomSource;
 
-        this._faceDirection = Direction.SOUTH;
+        this._direction = Direction.SOUTH;
         this._mouthOpen = false;
 
         this.createPacman();
@@ -109,7 +109,7 @@ class Pacman extends Entity {
     }
 
     rotateFace(direction) {
-        let zRotation = direction - this._faceDirection;
+        let zRotation = direction - this._direction;
 
         let wasMouthOpen = this._mouthOpen;
 
@@ -129,7 +129,7 @@ class Pacman extends Entity {
     updatePacmanFaceDirection(zRotation, faceDirection) {
         const {rotate} = TransformationUtils;
 
-        this._faceDirection = faceDirection;
+        this._direction = faceDirection;
 
         this._shapes.forEach((shape, i) => {
             rotate(shape._rotationMatrix, 0, 0, zRotation);
