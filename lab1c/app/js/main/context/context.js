@@ -30,9 +30,6 @@ const SPECULAR_MATERIAL = [1.0, 1.0, 1.0];
 // shininess
 const SHININESS = 100;
 
-// translation constants
-const MOVEMENT_SPEED = 0.5;
-
 /**
  * The Context class can be seen as a definition of the WebGL context. It also holds all the relevant information that
  * we need for using WebGL. It sets up the canvas, the shader-sources(s), the matrices, the coordinate systems as well as the light.

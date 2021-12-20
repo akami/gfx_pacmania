@@ -35,7 +35,7 @@ class Camera extends Entity{
     }
 
     move(direction) {
-        const {move} = TransformationUtils;
+        const {translate} = TransformationUtils;
 
         let xMovement = 0;
         let yMovement = 0;
@@ -62,6 +62,6 @@ class Camera extends Entity{
                 break;
         }
 
-        move(this._context._viewMatrix, -xMovement, -yMovement, -zMovement);
+        translate(this._context._viewMatrix, -xMovement, -yMovement, -zMovement);
     }
 }

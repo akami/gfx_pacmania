@@ -7,8 +7,8 @@
  *    a ----------- b/
  */
 
-const WIDTH = 0.4;
-const HEIGHT = 2.0;
+const WIDTH = 1.0;
+const HEIGHT = 1.0;
 const LENGTH = 1.0;
 
 const FRONT_NORMAL = [0.0,  0.0,  1.0];

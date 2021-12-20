@@ -10,7 +10,7 @@ class TransformationUtils {
         mat4.rotateZ(matrix, matrix, glMatrix.toRadian(zRotation));
     }
 
-    static move(matrix, xMovement, yMovement, zMovement) {
+    static translate(matrix, xMovement, yMovement, zMovement) {
         mat4.translate(matrix, matrix, [xMovement, 0, 0]);
         mat4.translate(matrix, matrix, [0, yMovement, 0]);
         mat4.translate(matrix, matrix, [0, 0, zMovement]);

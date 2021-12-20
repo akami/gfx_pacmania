@@ -1,7 +1,7 @@
 const PLANE_NORMAL = [0.0,  1.0,  0.0];
-const PLANE_UNIT = 20.;
+const PLANE_UNIT = 15.;
 
-const WALL_DISTANCE = PLANE_UNIT / 10. * 2; // 2 units to next wall
+const WALL_DISTANCE = 3; // 2 units to next wall
 
 const HORIZONTAL_INNER_WALLS = [
     {
@@ -15,7 +15,6 @@ const HORIZONTAL_INNER_WALLS = [
     {
         startingPoint: [WALL_DISTANCE, 0, WALL_DISTANCE * 4],
         length: WALL_DISTANCE * 2
-
     },
     {
         startingPoint: [WALL_DISTANCE * 2, 0, WALL_DISTANCE],

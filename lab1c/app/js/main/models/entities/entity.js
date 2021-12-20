@@ -5,6 +5,11 @@ class Entity {
     constructor(context) {
         this._context = context;
         this._shapes = [];
+        this._boundingBox = this.initBoundingBox();
+    }
+
+    initBoundingBox() {
+        // implementation in subclasses
     }
 
     move(direction) {

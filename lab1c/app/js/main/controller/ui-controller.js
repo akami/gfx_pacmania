@@ -13,12 +13,12 @@
 class UiController {
     static MOVEMENT_KEYS = ["ArrowRight", "ArrowLeft", "ArrowUp", "ArrowDown"];
 
-    constructor(entities) {
+    constructor(gameController) {
         /**
          * Entities that are controlled by user interaction
          * @private
          */
-        this._entities = entities;
+        this._gameController = gameController;
     }
 
     /**
@@ -38,16 +38,16 @@ class UiController {
     onMovementKeyDown(key) {
         switch (key) {
             case "ArrowRight" :
-                this._entities.forEach((entity, i) => entity.move(Direction.EAST));
+                this._gameController.moveControllableEntities(Direction.EAST);
                 break;
             case "ArrowLeft" :
-                    this._entities.forEach((entity, i) => entity.move(Direction.WEST));
+                this._gameController.moveControllableEntities(Direction.WEST);
                 break;
             case "ArrowUp" :
-                this._entities.forEach((entity, i) => entity.move(Direction.NORTH));
+                this._gameController.moveControllableEntities(Direction.NORTH);
                 break;
             case "ArrowDown" :
-                this._entities.forEach((entity, i) => entity.move(Direction.SOUTH));
+                this._gameController.moveControllableEntities(Direction.SOUTH);
                 break;
             default :
                 break;

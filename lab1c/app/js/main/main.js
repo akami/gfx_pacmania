@@ -42,8 +42,15 @@ function main(sources) {
     // set up renderController
     const renderController = new RenderController(context, shapes);
 
+    // set up gameController that controls all entities in the game
+    const gameController = new GameController({
+        pacman: pacman,
+        camera: camera,
+        labyrinth: labyrinth
+    });
+
     // set up ui controller
-    const uiController = new UiController([pacman, camera]);
+    const uiController = new UiController(gameController);
 
     // set up event listeners for user interaction
     document.addEventListener('keydown', (event) => {
