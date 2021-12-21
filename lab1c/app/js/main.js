@@ -32,7 +32,7 @@ function main(sources) {
 
     // setup entities
     let pacman = new Pacman(context, [0, 0.5, 0], {shapeSources: {top: sources[0], bottom: sources[1]}});
-    let camera = new Camera(context, [2., 15., 15.], pacman._position);
+    let camera = new Camera(context, [0., 10., 10.], pacman._position);
     let ground = new Ground(context, [0, 0, 0]);
 
     // setup lights

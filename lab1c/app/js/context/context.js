@@ -64,8 +64,8 @@ class Context {
     initClipSpace() {
         mat4.ortho(
             this._projectionMatrix,
-            -10.0, 20.0,
-            -10.0, 10.0,
+            -5.0, 10.0,
+            -5.0, 5.0,
             Context.FRUSTRUM_NEAR,
             Context.FRUSTRUM_FAR
         );
