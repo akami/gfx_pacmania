@@ -130,12 +130,12 @@ class FoodUtil {
 
         z = 5;
         food.push(new Food(context, [-2, 0.5, z], {shapeSources: {sphere: sphereSource}}));
+        food.push(new Food(context, [2, 0.5, z], {shapeSources: {sphere: sphereSource}}));
+        
         for (let x = -9; x <= -6; x++) {
             food.push(new Food(context, [x, 0.5, z], {shapeSources: {sphere: sphereSource}}));
         }
-        for (let x = 1; x <= 2; x++) {
-            food.push(new Food(context, [x, 0.5, z], {shapeSources: {sphere: sphereSource}}));
-        }
+
         for (let x = 6; x <= 9; x++) {
             food.push(new Food(context, [x, 0.5, z], {shapeSources: {sphere: sphereSource}}));
         }

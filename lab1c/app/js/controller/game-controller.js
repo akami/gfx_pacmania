@@ -51,6 +51,9 @@ class GameController {
 
         if(collidedFood !== undefined) {
             this._entities.food = food.filter(f => f !== collidedFood);
+            if(this._entities.food.length === 0 ){
+                window.location.reload();
+            }
         }
 
         // reset the new direction "buffer" to empty for the next tick
