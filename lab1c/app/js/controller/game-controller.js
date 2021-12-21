@@ -1,3 +1,15 @@
+/*
+ * @module Foundations of Computer Graphics
+ * @author Katharina Hoeckner
+ * 01638800
+ * WS2021
+ * University of Vienna
+ */
+
+/**
+ * This class is responsible for handling game logic. The game controller works in ticks, meaning that one action is
+ * done in a certain time frame.
+ */
 class GameController {
     static TICK_WAIT = 125;
 
@@ -17,10 +29,17 @@ class GameController {
         setTimeout(() => this.tick(), GameController.TICK_WAIT);
     }
 
+    /**
+     * Sets up direction buffer to make movements and gaming experience more fluid when the direction of Pacman is changed
+     * by the user.
+     */
     changeDirection(direction) {
         this._newDirection = direction;
     }
 
+    /**
+     * Moves all entities that are controlled by a direction change triggered by the user and handles logic upon collision detection.
+     */
     moveControllableEntities() {
         let pacman = this._entities.pacman;
         let walls = this._entities.walls;
@@ -49,6 +68,7 @@ class GameController {
             camera.move(currentDirection);
         }
 
+        // a collision was detected and the food entity is removed
         if(collidedFood !== undefined) {
             this._entities.food = food.filter(f => f !== collidedFood);
             if(this._entities.food.length === 0 ){
@@ -60,6 +80,10 @@ class GameController {
         this._newDirection = undefined;
     }
 
+    /**
+     * Collects all shapes for the render controller to render
+     * @returns {FlatArray<*[], 1>[]}
+     */
     collectShapes() {
         let shapes = [];
 

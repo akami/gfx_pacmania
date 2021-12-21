@@ -1,3 +1,7 @@
+/**
+ * This class represents the entity the player interacts with. Pacman consists of two half-sphere shapes that are animated
+ * continuously during the game.
+ */
 class Pacman extends Entity {
     static COLOR = [1., 0.866, 0.];
     static SCALE = 0.25;
@@ -24,6 +28,7 @@ class Pacman extends Entity {
             scale: Pacman.SCALE
         }));
 
+        // fix for obj file orientation
         this.rotateToViewer(shapes[0], shapes[1]);
 
         return shapes;
@@ -38,6 +43,15 @@ class Pacman extends Entity {
         };
     }
 
+    /**
+     * Moving Pacman involves the following steps:
+     * <ol>
+     *     <li> moving in a direction </li>
+     *     <li> rotating in a direction </li>
+     *     <li> open/close mouth </li>
+     * </ol>
+     * @param direction
+     */
     move(direction) {
         this.moveInternal(direction);
         this.rotate(direction);
@@ -83,6 +97,13 @@ class Pacman extends Entity {
         this._boundingBox.maxZ += zMovement;
     }
 
+    /**
+     * In this special case, in the created obj file, Pacman was facing up. So in order to make him face the viewer on
+     * game start, Pacman has to be rotated via the x-axis first.
+     *
+     * @param pacmanTop
+     * @param pacmanBottom
+     */
     rotateToViewer(pacmanTop, pacmanBottom) {
         let {rotate} = TransformationUtils;
 
@@ -92,11 +113,18 @@ class Pacman extends Entity {
         rotate(pacmanBottom._rotationMatrix, xRotation, 0, 0);
     }
 
+    /**
+     * Once a rotation is triggered by the user, the degrees of which Pacman has to rotate depend on the current direction
+     * Pacman is facing. In order to rotate correctly, Pacman's mouth has to be shut first.
+     * @param direction
+     */
     rotate(direction) {
+        // rotate around z axis depending on previous direction
         let zRotation = direction - this._direction;
 
         let wasMouthOpen = this._mouthOpen;
 
+        // close Pacman's mouth before rotation
         if(wasMouthOpen) {
             this.animateMouth(this._mouthOpen)
             this._mouthOpen = false;
@@ -104,12 +132,20 @@ class Pacman extends Entity {
 
         this.updateDirection(zRotation, direction);
 
+        // if mouth was open before, open it again after rotation to ensure a fluid animation
         if(wasMouthOpen) {
             this.animateMouth(this._mouthOpen)
             this._mouthOpen = true;
         }
     }
 
+    /**
+     * This method updates the current direction the Pacman is moving into and rotates the shapes accordingly, such that
+     * Pacman always faces the direction it is headed.
+     *
+     * @param zRotation
+     * @param faceDirection
+     */
     updateDirection(zRotation, faceDirection) {
         let {rotate} = TransformationUtils;
 
@@ -120,6 +156,10 @@ class Pacman extends Entity {
         });
     }
 
+    /**
+     * Checks whether the current state of Pacman's mouth is open or closed and calls the corresponding opposite method
+     * to trigger the animation.
+     */
     animateMouth() {
         this._mouthOpen ? this.closeMouth() : this.openMouth();
         this._mouthOpen = !this._mouthOpen;

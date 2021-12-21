@@ -35,6 +35,11 @@ class UiController {
         }
     }
 
+    /**
+     * Once a movement key was pressed, this is signaled to the game controller which handles the input further.
+     * @see GameController
+     * @param key
+     */
     onMovementKeyDown(key) {
         switch (key) {
             case "ArrowRight" :

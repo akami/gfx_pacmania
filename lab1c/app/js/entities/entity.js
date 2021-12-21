@@ -1,5 +1,7 @@
 /**
- * An entity is a collection of constructed-shapes that form one entity (e.g. labyrinth, pacman, ghost)
+ * An entity is a collection of constructed-shapes that form one entity (e.g. labyrinth, pacman, ghost). In addition to
+ * consisting of (multiple) shapes, an entity also has a bounding box which is used for intersection tests in collision
+ * detection. Furthermore, behavior, like movement, is defined here.
  */
 class Entity {
     constructor(context, position, additionalData) {

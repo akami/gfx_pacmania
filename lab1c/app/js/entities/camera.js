@@ -54,6 +54,9 @@ class Camera extends Entity{
                 break;
         }
 
+        /**
+         * The camera movement is an inverse operation
+         */
         translate(this._context._viewMatrix, -xMovement, -yMovement, -zMovement);
     }
 }

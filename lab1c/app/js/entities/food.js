@@ -1,3 +1,7 @@
+/**
+ * This class represents the dots for Pacman to eat. They are mere spheres that are loaded as obj files. Food is
+ * static and does not implement the move function.
+ */
 class Food extends Entity {
     static COLOR = [0.972, 1, 0.203];
     static SCALE = 0.1;

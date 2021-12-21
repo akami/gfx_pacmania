@@ -14,8 +14,9 @@
  *     <li> clearing the canvas {@link initCanvas} </li>
  *     <li> tell WebGL which program we are using </li>
  *     <li> set the shader uniforms </li>
- *     <li> get positions (and colors) of constructed-shapes from buffer and pass them to the GLSL shader attributes </li>
- *     <li> draw the constructed-shapes </li>
+ *     <li> get positions (and colors) of cshapes from buffer and pass them to the GLSL shader attributes </li>
+ *     <li> draw the shapes </li>
+ *     <li> draw the shapes' shadow </li>
  * </ol>
  */
 class RenderController {
@@ -74,7 +75,8 @@ class RenderController {
         let context = this._context;
         let gl = context._gl;
 
-        let numComponents = 3; //x, y, z --- r, g, b
+        //x, y, z --- r, g, b
+        let numComponents = 3;
 
         // pull out the position from the position buffer into vertexPosition attribute
         this.setAttribute(numComponents, shape._buffers.position, context._shaderProgram._programInfo.attribLocations.vertexPositionLocation);
@@ -106,11 +108,20 @@ class RenderController {
         gl.drawArrays(gl.TRIANGLES, 0, shape._vertexCount);
     }
 
+    /**
+     * This render call is responsible for drawing the shadow of a shape. To achieve this, in this method additional steps
+     * as opposed to the classical shape rendering method are added:
+     * A shadow projection matrix is created which is then applied to the model matrix. The shadow scalar is hereby set to 0.0 in order to
+     * draw the shadows in black, cancelling out the initial color of the shapes' vertices.
+     *
+     * @param shape
+     * @param light
+     */
     renderShadow(shape, light) {
         let context = this._context;
         let gl = context._gl;
 
-        // x, y, z - r, g, b
+        // x, y, z --- r, g, b
         let numComponents = 3;
 
         // pull out the position from the position buffer into vertexPosition attribute

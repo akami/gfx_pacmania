@@ -61,6 +61,12 @@ class Context {
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     }
 
+    /**
+     * In this case, an orthogonal projection is used. The projection matrix is then sheared by 10 degrees to achieve
+     * a shear-view as seen in the original Pacmania game. Due to the shearing, the center seemed to be off, which is
+     * why the right bound is double as large as the left bound of the mat4.ortho() function. This seemingly shifts
+     * the clip space to the right, resulting in the middle of the plane being centered again.
+     */
     initClipSpace() {
         mat4.ortho(
             this._projectionMatrix,
