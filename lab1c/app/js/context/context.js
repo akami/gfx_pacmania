@@ -71,12 +71,12 @@ class Context {
         );
 
         let angle = 10;
-        let shear1 = glMatrix.toRadian(angle);
+        let shear = glMatrix.toRadian(angle);
 
         let shearMatrix = [
             1, 0, 0, 0,
-            shear1, 1, 0, 0,
-            -shear1, 0, 1, 0,
+            shear, 1, 0, 0,
+            -shear, 0, 1, 0,
             0, 0, 0, 1
         ];
 

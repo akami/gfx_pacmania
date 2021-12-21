@@ -1,5 +1,5 @@
 class GameController {
-    static TICK_WAIT = 175;
+    static TICK_WAIT = 125;
 
     constructor(renderController, entities) {
         this._renderController = renderController;
