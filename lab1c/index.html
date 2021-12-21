@@ -22,52 +22,54 @@
 </div>
 
 <!-- shaders -->
-<script src="app/js/main/shader/shader-program.js"></script>
+<script src="app/js/shader/shader-program.js"></script>
 
-<script src="app/js/main/shader/phong-shader/shader-sources/phong-fragment-shader-source.js"></script>
-<script src="app/js/main/shader/phong-shader/shader-sources/phong-vertex-shader-source.js"></script>
+<script src="app/js/shader/phong-shader/shader-sources/phong-fragment-shader-source.js"></script>
+<script src="app/js/shader/phong-shader/shader-sources/phong-vertex-shader-source.js"></script>
 
-<script src="app/js/main/shader/phong-shader/phong-shader-program.js"></script>
+<script src="app/js/shader/phong-shader/phong-shader-program.js"></script>
 
 <!-- lib -->
 <script src="app/js/lib/gl-matrix-min.js"></script>
+
+<!-- constants -->
+<script src="app/js/constants.js"></script>
 
 <!-- utils -->
 <script src="app/js/utils/color-utils.js"></script>
 <script src="app/js/utils/transformation-utils.js"></script>
 <script src="app/js/utils/collision-detection-util.js"></script>
+<script src="app/js/utils/labyrinth-util.js"></script>
+<script src="app/js/utils/food-util.js"></script>
 
-<!-- moving-entities -->
-<script src="app/js/main/models/entities/moving-entities/direction.js"></script>
-<script src="app/js/main/models/entities/entity.js"></script>
-<script src="app/js/main/models/entities/static-entities/labyrinth/labyrinth.js"></script>
-<script src="app/js/main/models/entities/moving-entities/pacman.js"></script>
-<script src="app/js/main/models/entities/moving-entities/camera.js"></script>
+<!-- shapes -->
+<script src="app/js/shapes/shape.js"></script>
+<script src="app/js/shapes/wavefront.js"></script>
+<script src="app/js/shapes/plane.js"></script>
+<script src="app/js/shapes/cube.js"></script>
+
+<!-- entities -->
+<script src="app/js/entities/direction.js"></script>
+<script src="app/js/entities/entity.js"></script>
+<script src="app/js/entities/pacman.js"></script>
+<script src="app/js/entities/camera.js"></script>
+<script src="app/js/entities/ground.js"></script>
+<script src="app/js/entities/wall.js"></script>
+<script src="app/js/entities/food.js"></script>
 
 <!-- context -->
-<script src="app/js/main/context/context.js"></script>
-
-<!-- constants -->
-<script src="app/js/main/models/entities/static-entities/labyrinth/constants/labyrinth-constants.js"></script>
-
-<!-- constructed-shapes -->
-<script src="app/js/main/models/shapes/shape.js"></script>
-
-<script src="app/js/main/models/shapes/loaded-shapes/wavefront-model.js"></script>
-
-<script src="app/js/main/models/shapes/constructed-shapes/plane.js"></script>
-<script src="app/js/main/models/shapes/constructed-shapes/wall.js"></script>
+<script src="app/js/context/context.js"></script>
 
 <!-- light -->
-<script src="app/js/main/models/entities/static-entities/light/point-light.js"></script>
+<script src="app/js/entities/light.js"></script>
 
 <!-- controller -->
-<script src="app/js/main/controller/render-controller.js"></script>
-<script src="app/js/main/controller/game-controller.js"></script>
-<script src="app/js/main/controller/ui-controller.js"></script>
+<script src="app/js/controller/render-controller.js"></script>
+<script src="app/js/controller/game-controller.js"></script>
+<script src="app/js/controller/ui-controller.js"></script>
 
 <!-- app -->
-<script src="app/js/main/main.js"></script>
+<script src="app/js/main.js"></script>
 
 </body>
 </html>

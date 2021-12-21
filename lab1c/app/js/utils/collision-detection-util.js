@@ -1,12 +1,9 @@
 /*
- * references: https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection
+ * References: https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection
  */
-
 class CollisionDetectionUtil {
-    detectCollision(pacman, labyrinth, direction) {
-        let collision = false;
-
-        for (let i = 0; i < labyrinth._boundingBoxes.length; i++) {
+    detectCollision(pacman, objects, direction) {
+        for (let i = 0; i < objects.length; i++) {
             let moveX = 0, moveZ = 0;
             switch (direction) {
                 case Direction.NORTH:
@@ -23,13 +20,18 @@ class CollisionDetectionUtil {
                     break;
             }
 
-            if (this.detectIntersectingBoundingBoxes(pacman._boundingBox, labyrinth._boundingBoxes[i], moveX, moveZ)) {
-                collision = true;
-                break;
+            if(objects[i]._boundingBox === undefined) {
+                console.log(objects);
+                console.log(i);
+            }
+
+
+            if (this.detectIntersectingBoundingBoxes(pacman._boundingBox, objects[i]._boundingBox, moveX, moveZ)) {
+                return objects[i];
             }
         }
 
-        return collision;
+        return undefined;
     }
 
     detectIntersectingBoundingBoxes(box1, box2, moveX, moveZ) {
