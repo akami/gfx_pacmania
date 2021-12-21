@@ -33,10 +33,10 @@ function main(sources) {
     // setup entities
     let pacman = new Pacman(context, [0, 0.5, 0], {shapeSources: {top: sources[0], bottom: sources[1]}});
     let camera = new Camera(context, [0., 10., 10.], pacman._position);
-    let ground = new Ground(context, [0, 0, 0]);
+    let ground = new Ground(context, [0, -0.0001, 0]);
 
     // setup lights
-    let light = new Light([5.0, 8.0, 5.0]);
+    let light = new Light([5.0, 10.0, 5.0]);
 
     // setup walls
     let frontWall = new Wall(context, [0, 0.5, Plane.PLANE_UNIT], {width: Plane.PLANE_SIZE, length: MOVEMENT_SPEED});

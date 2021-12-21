@@ -17,13 +17,13 @@
             |- context                  : initializes WebGL canvas and clip space --> shear-view
             |- controller
                 |- game-controller      : game logic --> collision detection handling & continuous movement
-                |- render-controller    : rendering logic --> fix for lab1a in render shapes method
+                |- render-controller    : rendering logic --> fix for lab1a in render shapes method, rendering shadows
                 |- ui-controller        : user interaction --> user changes direction of pacman
             |- entities                 : game entities --> mere shapes (vertices, normals, ...) are part of entities of the game. Entities
                                             have additional properties like bounding boxes for collision detection or behaviours like move.
                                             Entities can be made up of multiple shapes (like e.g. Pacman)
             |- lib                      : glMatrix library
-            |- shader                   : shader GLSL sources --> lab1b fix
+            |- shader                   : shader GLSL sources --> lab1b fix, shadows
             |- shapes                   : constructed shapes to render (Cube, Plane, ...) and WaveFront shape containing obj parser
             |- utils                    : util classes for business logic (collision detection, color generation, transformations, ...)
                                             or generating hard-coded placed objects (walls, food)
@@ -36,7 +36,7 @@
  ------------------------------------
 
  - foundations: labyrinth, animated Pacman
- - graphical aspects: shear-view
+ - graphical aspects: shear-view, shadow
  - gaming aspects: continuous movement, centered camera, solid walls, dots to eat ("food")
 
  |---- foundations ----|
@@ -57,7 +57,7 @@
      - calculating the reflectionVector has been moved to the fragment shader
        @see app/js/shader/phong-shader/shader-sources/
 
-     - the light is positioned at the right bottom quarter of the scene at [5.0, 8.0, 5.0]
+     - the light is positioned at the right bottom quarter of the scene at [5.0, 10.0, 5.0]
        @see app/js/main.js
 
      - I used a point light to achieve this particular lighting of the scene. I tried to place the light at infinity before,
@@ -81,15 +81,27 @@
       @see app/js/shapes/shape.js
       @see app/js/controller/render-controller.js
 
-    - Pacman opens or closes its mouth per tick. He also turns in one tick. This results in an animation that seems a little
-      bit "jumpy". // TODO
+    - Pacman opens or closes his mouth per tick. He also turns in one tick. This results in an animation that seems a
+      bit "jumpy" and not fluid.
 
  |---- graphical aspects ----|
 
  1) shear view:
     I achieved a shear view by using an orthogonal projection (mat4.ortho()) and then constructing a shearing
-    matrix that shears with respect to the x-axis by 10 degrees and applying it to the projection matrix.
+    matrix that shears it by 10 degrees and applying it to the projection matrix.
     @see app/js/context/context.js
+
+ 2) shadow:
+    I used the approach as presented in the lectures and in the Angel book, namely the projection of the shadow onto
+    a plane. To do this, I implemented a second render method after the rendering of a shape and defined the shadow
+    projection matrix, as seen in the lectures for orthogonal projections, there. Additionally, I defined a shadow scalar
+    uniform that is applied to the light components in the fragment shader. The scalar is 1 for rendering objects, and 0
+    for rendering shadows, in order to make the shadows black. I noticed funny behaviour, as the shadow is drawn right
+    onto the plane at y = 0. It seemed like WebGL could not decide which, the plane or the shadow, is above. To mitigate
+    that behaviour, I set the plane in the main function to be slightly beneath 0.
+    @see app/js/controller/render-controller.js
+    @see app/js/shader/phong-shader/shader-sources/phong-fragment-shader-source.js
+    @see app/js/main.js
 
   |---- gaming aspects ----|
 
@@ -97,7 +109,7 @@
      @see app/js/controller/game-controller.js
 
   2) centered camera:
-    Made camera an entity that can be moved by game-controller.
+    Made camera an entity that can be moved by the game-controller.
     @see app/js/entities/camera.js
     @see app/js/controller/game-controller.js
 

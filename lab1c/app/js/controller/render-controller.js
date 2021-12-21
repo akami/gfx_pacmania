@@ -40,6 +40,10 @@ class RenderController {
         // render constructed-shapes
         shapes.forEach((shape) => {
             this.renderShape(shape);
+
+            if (shape.throwsShadow()) {
+                this.renderShadow(shape, light);
+            }
         });
     }
 
@@ -95,9 +99,53 @@ class RenderController {
 
         gl.uniform1f(context._shaderProgram._programInfo.uniformLocations.shininessLocation, shape._shininess);
 
+        // set shadow scalar
+        gl.uniform1f(context._shaderProgram._programInfo.uniformLocations.shadowScalarLocation, 1.0);
+
         // draw shape
         gl.drawArrays(gl.TRIANGLES, 0, shape._vertexCount);
+    }
 
+    renderShadow(shape, light) {
+        let context = this._context;
+        let gl = context._gl;
+
+        // x, y, z - r, g, b
+        let numComponents = 3;
+
+        // pull out the position from the position buffer into vertexPosition attribute
+        this.setAttribute(numComponents, shape._buffers.position, context._shaderProgram._programInfo.attribLocations.vertexPositionLocation);
+
+        // pull out the colors from the color buffer into the vertexColor attribute
+        this.setAttribute(numComponents, shape._buffers.color, context._shaderProgram._programInfo.attribLocations.vertexColorLocation);
+
+        // pull out the normals from the normal buffer into the vertexNormal attribute
+        this.setAttribute(numComponents, shape._buffers.normals, context._shaderProgram._programInfo.attribLocations.vertexNormalLocation);
+
+        // apply all transformations to the model matrix
+        let modelMatrix = mat4.create();
+
+        mat4.multiply(modelMatrix, shape._rotationMatrix, shape._scalingMatrix);
+        mat4.multiply(modelMatrix, shape._translationMatrix, modelMatrix);
+
+        // apply shadow
+        let shadowMatrix = mat4.fromValues(
+            1, 0, 0, 0,
+            -light._position[0] / light._position[1], 0, -light._position[2] / light._position[1], 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1
+        );
+
+        mat4.multiply(modelMatrix, shadowMatrix, modelMatrix);
+
+        // set matrix uniforms
+        gl.uniformMatrix4fv(context._shaderProgram._programInfo.uniformLocations.modelMatrixLocation, false, modelMatrix);
+
+        // set shadow scalar
+        gl.uniform1f(context._shaderProgram._programInfo.uniformLocations.shadowScalarLocation, 0.0);
+
+        // draw shape
+        gl.drawArrays(gl.TRIANGLES, 0, shape._vertexCount);
     }
 
     setAttribute(numComponents, buffer, location) {

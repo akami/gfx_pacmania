@@ -136,6 +136,10 @@ class Shape {
             normals: normalBuffer
         };
     }
+
+    throwsShadow() {
+        return true;
+    }
 }
 
 

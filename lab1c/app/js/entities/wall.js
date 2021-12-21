@@ -9,7 +9,7 @@ class Wall extends Entity {
 
         this.scale();
 
-        // TODO this is kinda hacky
+        // TODO this is kinda hacky, since initBoundingBox is already called in the super constructor
         this._boundingBox = this.initBoundingBox();
     }
 
@@ -27,6 +27,6 @@ class Wall extends Entity {
     }
 
     scale() {
-        TransformationUtils.scale(this._shapes[0]._scalingMatrix, this._width, MOVEMENT_SPEED, this._length);
+        TransformationUtils.scale(this._shapes[0]._scalingMatrix, this._width, MOVEMENT_SPEED / 2, this._length);
     }
 }

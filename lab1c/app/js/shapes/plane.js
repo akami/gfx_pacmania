@@ -31,4 +31,8 @@ class Plane extends Shape {
 
         return normals;
     }
+
+    throwsShadow() {
+        return false;
+    }
 }

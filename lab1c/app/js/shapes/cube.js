@@ -68,7 +68,14 @@ class Cube extends Shape {
     }
 
     getNormals() {
-        let normals = [Cube.FRONT_NORMAL, Cube.RIGHT_NORMAL, Cube.BACK_NORMAL, Cube.LEFT_NORMAL, Cube.TOP_NORMAL, Cube.BOTTOM_NORMAL];
+        let normals = [
+            Cube.FRONT_NORMAL,
+            Cube.RIGHT_NORMAL,
+            Cube.BACK_NORMAL,
+            Cube.LEFT_NORMAL,
+            Cube.TOP_NORMAL,
+            Cube.BOTTOM_NORMAL
+        ];
         let newNormals = [];
 
         for (let i = 0; i < normals.length; i++) {

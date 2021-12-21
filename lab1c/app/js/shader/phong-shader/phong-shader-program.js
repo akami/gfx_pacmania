@@ -34,7 +34,8 @@ class PhongShaderProgram extends ShaderProgram {
                 diffuseLightLocation: gl.getUniformLocation(this._program, 'diffuseLight'),
                 specularLightLocation: gl.getUniformLocation(this._program, "specularLight"),
 
-                shininessLocation: gl.getUniformLocation(this._program, 'shininess')
+                shininessLocation: gl.getUniformLocation(this._program, 'shininess'),
+                shadowScalarLocation: gl.getUniformLocation(this._program, 'shadowScalar')
             }
         }
     }

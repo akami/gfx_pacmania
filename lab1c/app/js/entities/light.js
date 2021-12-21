@@ -1,6 +1,5 @@
-// TODO fix this shitty shit
 class Light extends Entity {
-    static AMBIENT_COMPONENT = [0.2, 0.2, 0.2];
+    static AMBIENT_COMPONENT = [0.1, 0.1, 0.1];
     static AMBIENT_MATERIAL = [1.0, 1.0, 1.0];
 
     static DIFFUSE_COMPONENT = [1.0, 1.0, 1.0];

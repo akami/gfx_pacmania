@@ -3,6 +3,7 @@ let PHONG_FRAGMENT_SHADER_SOURCE = `
     
     uniform vec3 ambientLight, diffuseLight, specularLight;
     uniform float shininess;
+    uniform float shadowScalar;
     
     varying vec3 normalVector;
     varying vec3 pointToLightVector;
@@ -11,15 +12,12 @@ let PHONG_FRAGMENT_SHADER_SOURCE = `
     varying vec4 fragmentColor;
     
     void main() {
-        vec3 ambientLight = normalize(ambientLight);
-        vec3 diffuseLight = normalize(diffuseLight);
-        
         vec3 normalVector = normalize(normalVector);
         vec3 pointToLightVector = normalize(pointToLightVector);
     
         vec3 ambient = ambientLight * fragmentColor.rgb;
         vec3 diffuse = diffuseLight * fragmentColor.rgb * max(dot(normalVector, pointToLightVector), 0.0);
-        
+
         vec3 reflectionVector = normalize(2.0 * dot(normalVector, pointToLightVector) * normalVector - pointToLightVector);
         
         vec3 specular = specularLight * max(pow(dot(pointToCameraVector, reflectionVector), shininess), 0.0);
@@ -28,6 +26,6 @@ let PHONG_FRAGMENT_SHADER_SOURCE = `
             specular = vec3(0.0, 0.0, 0.0);
         }
         
-        gl_FragColor = vec4(ambient + diffuse + specular, fragmentColor.a);
+        gl_FragColor = vec4(shadowScalar * (ambient + diffuse + specular), fragmentColor.a);
     }
 `;
