@@ -18,7 +18,6 @@ let PHONG_VERTEX_SHADER_SOURCE = `
     varying vec3 normalVector;
     varying vec3 pointToLightVector;
     varying vec3 pointToCameraVector;
-    varying vec3 reflectionVector;
     
     varying vec4 fragmentColor;
     
@@ -33,7 +32,7 @@ let PHONG_VERTEX_SHADER_SOURCE = `
         normalVector = normalize(modelWorldPosition + normalMatrix * vertexNormal).xyz;
         pointToLightVector = normalize(lightWorldPosition - modelWorldPosition).xyz;
         pointToCameraVector = normalize(cameraWorldPosition - modelWorldPosition);
-        reflectionVector = normalize(2.0 * dot(normalVector, pointToLightVector) * normalVector - pointToLightVector);
+
         
         fragmentColor = vec4(vertexColor, 1.0);
     } 
