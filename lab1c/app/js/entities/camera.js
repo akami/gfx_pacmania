@@ -9,18 +9,13 @@ class Camera extends Entity{
     /**
      * The setUpViewSpace() function is responsible for setting up the "View Space", this essentially corresponds to the
      * view coordinate system. Using the view matrix, the world (a.k.a the objects in it) is translated to be in front
-     * of the camera, to be looked at "from the perspective of the user". To achieve this, we use following constants
-     * that are defined in the context-constants.js file:
+     * of the camera, to be looked at "from the perspective of the user".
      *
      * <ul>
      *     <li> CAMERA_POSITION: The location of the camera in the world </li>
      *     <li> CAMERA_FOCUS: Where the camera "points" to </li>
      *     <li> CAMERA_UP: which direction is up (usually positive y) </li>
      * </ul>
-     *
-     * @see CAMERA_POSITION
-     * @see CAMERA_FOCUS
-     * @see CAMERA_UP
      */
     initViewSpace(focus) {
         mat4.lookAt(

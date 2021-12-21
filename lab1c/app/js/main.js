@@ -36,7 +36,7 @@ function main(sources) {
     let ground = new Ground(context, [0, 0, 0]);
 
     // setup lights
-    let light = new Light([0.0, 25.0, 0.0]);
+    let light = new Light([5.0, 8.0, 5.0]);
 
     // setup walls
     let frontWall = new Wall(context, [0, 0.5, Plane.PLANE_UNIT], {width: Plane.PLANE_SIZE, length: MOVEMENT_SPEED});
