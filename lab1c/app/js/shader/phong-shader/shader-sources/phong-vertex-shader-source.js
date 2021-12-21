@@ -23,13 +23,13 @@ let PHONG_VERTEX_SHADER_SOURCE = `
     
     void main() {
         vec3 modelWorldPosition = (worldMatrix * modelMatrix * vec4(vertexPosition, 1.0)).xyz;
-        
+        normalVector = normalize(normalMatrix * vertexNormal).xyz;
+                
         gl_Position = projectionMatrix * viewMatrix * vec4(modelWorldPosition, 1.0);
 
         vec3 lightWorldPosition = (worldMatrix * lightMatrix * vec4(pointLightPosition, 0.0)).xyz;
         vec3 cameraWorldPosition = (viewMatrix * worldMatrix * vec4(cameraPosition, 1.0)).xyz;
         
-        normalVector = normalize(modelWorldPosition + normalMatrix * vertexNormal).xyz;
         pointToLightVector = normalize(lightWorldPosition - modelWorldPosition).xyz;
         pointToCameraVector = normalize(cameraWorldPosition - modelWorldPosition);
 

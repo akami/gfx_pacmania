@@ -11,6 +11,12 @@ let PHONG_FRAGMENT_SHADER_SOURCE = `
     varying vec4 fragmentColor;
     
     void main() {
+        vec3 ambientLight = normalize(ambientLight);
+        vec3 diffuseLight = normalize(diffuseLight);
+        
+        vec3 normalVector = normalize(normalVector);
+        vec3 pointToLightVector = normalize(pointToLightVector);
+    
         vec3 ambient = ambientLight * fragmentColor.rgb;
         vec3 diffuse = diffuseLight * fragmentColor.rgb * max(dot(normalVector, pointToLightVector), 0.0);
         
