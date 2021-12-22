@@ -19,14 +19,14 @@ class Wall extends Entity {
 
     initBoundingBox() {
         return {
-            minX: this._position[0] - this._width / 2,
-            maxX: this._position[0] + this._width / 2,
-            minZ: this._position[2] - this._length / 2,
-            maxZ: this._position[2] + this._length / 2
+            minX: this._position[0] - (this._width / 2),
+            maxX: this._position[0] + (this._width / 2),
+            minZ: this._position[2] - (this._length / 2),
+            maxZ: this._position[2] + (this._length / 2)
         }
     }
 
     scale() {
-        TransformationUtils.scale(this._shapes[0]._scalingMatrix, this._width, MOVEMENT_SPEED / 2, this._length);
+        TransformationUtils.scale(this._shapes[0]._scalingMatrix, this._width, TILE_SIZE / 2, this._length);
     }
 }

@@ -27,6 +27,8 @@ class Camera extends Entity{
     }
 
     move(direction) {
+        super.move(direction);
+
         let {translate} = TransformationUtils;
 
         let xMovement = 0;
@@ -36,19 +38,19 @@ class Camera extends Entity{
         switch (direction) {
             case Direction.EAST :
                 // move in direction of positive x axis (right)
-                xMovement += MOVEMENT_SPEED;
+                xMovement += this._movementSpeed;
                 break;
             case Direction.WEST :
                 // move in direction of negative x axis (left)
-                xMovement -= MOVEMENT_SPEED;
+                xMovement -= this._movementSpeed;
                 break;
             case Direction.NORTH :
                 // move in direction of negative z axis (forward)
-                zMovement -= MOVEMENT_SPEED;
+                zMovement -= this._movementSpeed;
                 break;
             case Direction.SOUTH :
                 // move in direction of positive z axis (backward)
-                zMovement += MOVEMENT_SPEED;
+                zMovement += this._movementSpeed;
                 break;
             default :
                 break;

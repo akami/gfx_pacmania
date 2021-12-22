@@ -4,7 +4,7 @@
  */
 class Pacman extends Entity {
     static COLOR = [1., 0.866, 0.];
-    static SCALE = 0.25;
+    static HALF_SIZE = 0.25;
 
     constructor(context, position, additionalData) {
         super(context, position, additionalData);
@@ -19,13 +19,13 @@ class Pacman extends Entity {
         shapes.push(new WaveFront(this._context, this._position, {
             color: Pacman.COLOR,
             source: shapeSources['top'],
-            scale: Pacman.SCALE
+            scale: Pacman.HALF_SIZE
         }));
 
         shapes.push(new WaveFront(this._context, this._position, {
             color: Pacman.COLOR,
             source: shapeSources['bottom'],
-            scale: Pacman.SCALE
+            scale: Pacman.HALF_SIZE
         }));
 
         // fix for obj file orientation
@@ -36,10 +36,10 @@ class Pacman extends Entity {
 
     initBoundingBox() {
         return {
-          minX: this._position[0] - Pacman.SCALE,
-          maxX: this._position[0] + Pacman.SCALE,
-          minZ: this._position[2] - Pacman.SCALE,
-          maxZ: this._position[2] + Pacman.SCALE
+          minX: this._position[0] - Pacman.HALF_SIZE,
+          maxX: this._position[0] + Pacman.HALF_SIZE,
+          minZ: this._position[2] - Pacman.HALF_SIZE,
+          maxZ: this._position[2] + Pacman.HALF_SIZE
         };
     }
 
@@ -53,10 +53,11 @@ class Pacman extends Entity {
      * @param direction
      */
     move(direction) {
+        super.move(direction);
+
         this.moveInternal(direction);
         this.rotate(direction);
-
-        this.animateMouth();
+        this._boundingBox = this.initBoundingBox();
     }
 
     moveInternal(direction) {
@@ -69,19 +70,19 @@ class Pacman extends Entity {
         switch (direction) {
             case Direction.EAST :
                 // move in direction of positive x axis (right)
-                xMovement += MOVEMENT_SPEED;
+                xMovement += this._movementSpeed;
                 break;
             case Direction.WEST :
                 // move in direction of negative x axis (left)
-                xMovement -= MOVEMENT_SPEED;
+                xMovement -= this._movementSpeed;
                 break;
             case Direction.NORTH :
                 // move in direction of negative z axis (forward)
-                zMovement -= MOVEMENT_SPEED;
+                zMovement -= this._movementSpeed;
                 break;
             case Direction.SOUTH :
                 // move in direction of positive z axis (backward)
-                zMovement += MOVEMENT_SPEED;
+                zMovement += this._movementSpeed;
                 break;
             default :
                 break;
@@ -90,11 +91,6 @@ class Pacman extends Entity {
         this._shapes.forEach((shape, i) => {
             translate(shape._translationMatrix, xMovement, yMovement, zMovement);
         });
-
-        this._boundingBox.minX += xMovement;
-        this._boundingBox.maxX += xMovement;
-        this._boundingBox.minZ += zMovement;
-        this._boundingBox.maxZ += zMovement;
     }
 
     /**

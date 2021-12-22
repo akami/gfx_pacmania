@@ -39,10 +39,10 @@ function main(sources) {
     let light = new Light([5.0, 10.0, 5.0]);
 
     // setup walls
-    let frontWall = new Wall(context, [0, 0.5, Plane.PLANE_UNIT], {width: Plane.PLANE_SIZE, length: MOVEMENT_SPEED});
-    let backWall = new Wall(context, [0, 0.5, -Plane.PLANE_UNIT], {width: Plane.PLANE_SIZE, length: MOVEMENT_SPEED});
-    let rightWall = new Wall(context, [Plane.PLANE_UNIT, 0.5, 0], {width: MOVEMENT_SPEED, length: Plane.PLANE_SIZE});
-    let leftWall = new Wall(context, [-Plane.PLANE_UNIT, 0.5, 0], {width: MOVEMENT_SPEED, length: Plane.PLANE_SIZE});
+    let frontWall = new Wall(context, [0, 0.5, Plane.PLANE_UNIT], {width: Plane.PLANE_SIZE, length: TILE_SIZE});
+    let backWall = new Wall(context, [0, 0.5, -Plane.PLANE_UNIT], {width: Plane.PLANE_SIZE, length: TILE_SIZE});
+    let rightWall = new Wall(context, [Plane.PLANE_UNIT, 0.5, 0], {width: TILE_SIZE, length: Plane.PLANE_SIZE});
+    let leftWall = new Wall(context, [-Plane.PLANE_UNIT, 0.5, 0], {width: TILE_SIZE, length: Plane.PLANE_SIZE});
 
     let walls = LabyrinthUtil.setUpWalls(context);
 

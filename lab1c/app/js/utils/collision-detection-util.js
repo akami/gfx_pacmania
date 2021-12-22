@@ -2,29 +2,23 @@
  * References: https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection
  */
 class CollisionDetectionUtil {
-    detectCollision(pacman, objects, direction) {
+    detectCollision(pacman, objects, direction, comparisonValue) {
         for (let i = 0; i < objects.length; i++) {
             let moveX = 0, moveZ = 0;
             switch (direction) {
                 case Direction.NORTH:
-                    moveZ = -MOVEMENT_SPEED;
+                    moveZ = -comparisonValue;
                     break;
                 case Direction.EAST:
-                    moveX = MOVEMENT_SPEED;
+                    moveX = comparisonValue;
                     break;
                 case Direction.SOUTH:
-                    moveZ = MOVEMENT_SPEED;
+                    moveZ = comparisonValue;
                     break;
                 case Direction.WEST:
-                    moveX = -MOVEMENT_SPEED;
+                    moveX = -comparisonValue;
                     break;
             }
-
-            if(objects[i]._boundingBox === undefined) {
-                console.log(objects);
-                console.log(i);
-            }
-
 
             if (this.detectIntersectingBoundingBoxes(pacman._boundingBox, objects[i]._boundingBox, moveX, moveZ)) {
                 return objects[i];

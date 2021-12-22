@@ -4,6 +4,8 @@
  * detection. Furthermore, behavior, like movement, is defined here.
  */
 class Entity {
+    static MOVEMENT_SPEED = 0.1;
+
     constructor(context, position, additionalData) {
         this._context = context;
 
@@ -11,6 +13,8 @@ class Entity {
 
         this._shapes = this.initShapes(additionalData.shapeSources);
         this._boundingBox = this.initBoundingBox();
+
+        this._movementSpeed = Entity.MOVEMENT_SPEED;
     }
 
     initShapes(shapeSources) {
@@ -23,7 +27,24 @@ class Entity {
         return {};
     }
 
+    setMovementSpeed(movementSpeed) {
+        this._movementSpeed = movementSpeed;
+    }
+
     move(direction) {
-        // implementation in subclasses
+        switch(direction) {
+            case Direction.NORTH:
+                this._position[2] -= this._movementSpeed;
+                break;
+            case Direction.EAST:
+                this._position[0] += this._movementSpeed;
+                break;
+            case Direction.SOUTH:
+                this._position[2] += this._movementSpeed;
+                break;
+            case Direction.WEST:
+                this._position[0] -= this._movementSpeed;
+                break;
+        }
     }
 }
