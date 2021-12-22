@@ -30,6 +30,7 @@ class Shape {
         this._vertices = this.getVertices();
         this._vertexCount = this.getVertexCount();
         this._normals = this.getNormals();
+        this._textureCoordinates = this.getTextureCoordinates();
 
         this._translationMatrix = mat4.create();
         this._rotationMatrix = mat4.create();
@@ -88,6 +89,10 @@ class Shape {
         return colors;
     }
 
+    getTextureCoordinates() {
+        return[];
+    }
+
     getShininess() {
         if (this._additionalData !== undefined && this._additionalData.shininess !== undefined) {
             return this._additionalData.shininess;
@@ -130,10 +135,15 @@ class Shape {
         gl.bindBuffer(gl.ARRAY_BUFFER, normalBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this._normals.flat(2)), gl.STATIC_DRAW);
 
+        let textureBuffer = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, textureBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this._textureCoordinates.flat(2)), gl.STATIC_DRAW);
+
         return {
             position: vertexBuffer,
             color: colorBuffer,
-            normals: normalBuffer
+            normals: normalBuffer,
+            texture: textureBuffer
         };
     }
 

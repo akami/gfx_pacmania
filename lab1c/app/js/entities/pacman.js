@@ -11,6 +11,8 @@ class Pacman extends Entity {
 
         this._direction = Direction.SOUTH;
         this._mouthOpen = false;
+
+        this._movementState = 0; // Pacman starts in the middle of the tile
     }
 
     initShapes(shapeSources) {
@@ -189,6 +191,6 @@ class Pacman extends Entity {
         rotate(this._shapes[0]._rotationMatrix, xRotation, 0, 0);
 
         // rotate bottom half of pacman
-        rotate(this._shapes[1]._rotationMatrix, -xRotation, 0, 0);
+       rotate(this._shapes[1]._rotationMatrix, -xRotation, 0, 0);
     }
 }

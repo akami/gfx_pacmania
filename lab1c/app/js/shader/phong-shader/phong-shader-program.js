@@ -16,6 +16,8 @@ class PhongShaderProgram extends ShaderProgram {
                 vertexPositionLocation: gl.getAttribLocation(this._program, 'vertexPosition'),
                 vertexColorLocation: gl.getAttribLocation(this._program, 'vertexColor'),
                 vertexNormalLocation: gl.getAttribLocation(this._program, 'vertexNormal'),
+
+                textureCoordinateLocation: gl.getAttribLocation(this._program, 'textureCoordinate')
             },
             uniformLocations: {
                 projectionMatrixLocation: gl.getUniformLocation(this._program, 'projectionMatrix'),
@@ -35,7 +37,7 @@ class PhongShaderProgram extends ShaderProgram {
                 specularLightLocation: gl.getUniformLocation(this._program, "specularLight"),
 
                 shininessLocation: gl.getUniformLocation(this._program, 'shininess'),
-                shadowScalarLocation: gl.getUniformLocation(this._program, 'shadowScalar')
+                shadowScalarLocation: gl.getUniformLocation(this._program, 'shadowScalar'),
             }
         }
     }

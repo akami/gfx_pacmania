@@ -1,5 +1,5 @@
 class Wall extends Entity {
-    static COLOR = [1, 1, 1];
+    static COLOR = [0.149, 0.274, 0.325];
 
     constructor(context, position, additionalData) {
         super(context, position, additionalData);
@@ -8,8 +8,6 @@ class Wall extends Entity {
         this._length = additionalData.length;
 
         this.scale();
-
-        // TODO this is kinda hacky, since initBoundingBox is already called in the super constructor
         this._boundingBox = this.initBoundingBox();
     }
 

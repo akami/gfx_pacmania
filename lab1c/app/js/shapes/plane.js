@@ -5,7 +5,7 @@
  *    a ----------- b
  */
 class Plane extends Shape {
-    static PLANE_NORMAL = [0.0,  1.0,  0.0];
+    static PLANE_NORMAL = [0.0, 1.0, 0.0];
     static PLANE_SIZE = 21;
     static PLANE_UNIT = (Plane.PLANE_SIZE - 1) / 2;
 
@@ -30,6 +30,18 @@ class Plane extends Shape {
         }
 
         return normals;
+    }
+
+    getTextureCoordinates() {
+        let a = [0.0, 0.0];
+        let b = [1.0, 0.0];
+        let c = [1.0, 1.0];
+        let d = [0.0, 1.0];
+
+        return [
+            d, a, b,
+            d, b, c
+        ];
     }
 
     throwsShadow() {

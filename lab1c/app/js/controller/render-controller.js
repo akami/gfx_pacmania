@@ -87,6 +87,9 @@ class RenderController {
         // pull out the normals from the normal buffer into the vertexNormal attribute
         this.setAttribute(numComponents, shape._buffers.normals, context._shaderProgram._programInfo.attribLocations.vertexNormalLocation);
 
+        // pull out the texture coordinates from the texture buffer into the textureCoordinate attribute
+        this.setAttribute(2, shape._buffers.texture, context._shaderProgram._programInfo.attribLocations.textureCoordinateLocation);
+
         // apply all transformations to the model matrix
         let modelMatrix = mat4.create();
 
@@ -132,6 +135,9 @@ class RenderController {
 
         // pull out the normals from the normal buffer into the vertexNormal attribute
         this.setAttribute(numComponents, shape._buffers.normals, context._shaderProgram._programInfo.attribLocations.vertexNormalLocation);
+
+        // pull out the texture coordinates from the texture buffer into the textureCoordinate attribute
+        this.setAttribute(2, shape._buffers.texture, context._shaderProgram._programInfo.attribLocations.textureCoordinateLocation);
 
         // apply all transformations to the model matrix
         let modelMatrix = mat4.create();

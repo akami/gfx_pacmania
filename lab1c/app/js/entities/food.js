@@ -4,7 +4,7 @@
  */
 class Food extends Entity {
     static COLOR = [0.972, 1, 0.203];
-    static SCALE = 0.1;
+    static SCALE = 0.05;
 
     initShapes(shapeSources) {
         return [new WaveFront(this._context, this._position, {
@@ -16,10 +16,10 @@ class Food extends Entity {
 
     initBoundingBox() {
         return {
-            minX: this._position[0] - 0.1,
-            maxX: this._position[0] + 0.1,
-            minZ: this._position[2] - 0.1,
-            maxZ: this._position[2] + 0.1
+            minX: this._position[0] - Food.SCALE,
+            maxX: this._position[0] + Food.SCALE,
+            minZ: this._position[2] - Food.SCALE,
+            maxZ: this._position[2] + Food.SCALE
         }
     }
 }

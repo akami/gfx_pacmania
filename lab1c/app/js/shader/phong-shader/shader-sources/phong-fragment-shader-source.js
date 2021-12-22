@@ -5,11 +5,14 @@ let PHONG_FRAGMENT_SHADER_SOURCE = `
     uniform float shininess;
     uniform float shadowScalar;
     
+    uniform sampler2D texture;
+    
     varying vec3 normalVector;
     varying vec3 pointToLightVector;
     varying vec3 pointToCameraVector;
     
     varying vec4 fragmentColor;
+    varying vec2 v_textureCoordinate;
     
     void main() {
         vec3 normalVector = normalize(normalVector);
@@ -26,6 +29,6 @@ let PHONG_FRAGMENT_SHADER_SOURCE = `
             specular = vec3(0.0, 0.0, 0.0);
         }
         
-        gl_FragColor = vec4(shadowScalar * (ambient + diffuse + specular), fragmentColor.a);
+        gl_FragColor = vec4(shadowScalar * (ambient + diffuse + specular), fragmentColor.a) + texture2D(texture, v_textureCoordinate);
     }
 `;

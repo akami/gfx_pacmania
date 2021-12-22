@@ -86,4 +86,25 @@ class Cube extends Shape {
 
         return newNormals;
     }
+
+    getTextureCoordinates() {
+        let a = [0.0, 0.0];
+        let b = [1.0, 0.0];
+        let c = [1.0, 1.0];
+        let d = [0.0, 1.0];
+
+        let face = [
+            d, a, b,
+            d, b, c
+        ];
+
+        return [
+            face,
+            face,
+            face,
+            face,
+            face,
+            face
+        ];
+    }
 }

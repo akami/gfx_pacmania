@@ -6,9 +6,9 @@
  * University of Vienna
  */
 
- ____________________________________
- | ---------- STRUCTURE ----------- |
- ------------------------------------
+ ____________________________________________________
+ | ---------- GENERAL REMARKS: STRUCTURE ----------- |
+ ----------------------------------------------------
  remarks on general structure of the project and where to find things:
 
     |- app
@@ -37,7 +37,7 @@
 
  - foundations: labyrinth, animated Pacman
  - graphical aspects: shear-view, shadow
- - gaming aspects: continuous movement, centered camera, solid walls, dots to eat ("food")
+ - gaming aspects: continuous movement, centered camera, solid walls, dots to eat ("food"), two enemy ghosts
 
  |---- foundations ----|
 
@@ -125,3 +125,60 @@
     @see app/js/utils/food-util.js
     @see app/js/entities/food.js
     @see app/js/controller/game-controller.js
+
+  5) two enemy ghosts:
+    The enemy ghosts were modeled using blender. They choose a different direction once hitting a wall. Upon a collision
+    with pacman, the game freezes and restarts. Due to the issues mentioned earlier by using fractional movements, the
+    ghosts sometimes appear to be not in the center of a tile when changing directions. I think that this is due to the fact that the
+    entity's bounding box is also moved when moving the entity, but, by using fractions, due to computational rounding errors
+    the amount of movement can differ slightly. This can accumulate over the course of the game.
+
+    Also, another issue I could not fix is that the rotation of the face in north or south direction is inverted.
+    This is because of a modeling error I had to fix regarding pacman, such that pacman initially faces the viewer.
+    Pacman had to be rotated before the first render by the z axis, which also influenced the actual degrees in the directions
+    I used for the rotations. Because the rotations are altered, this ultimately also influenced the rotation of the ghosts,
+    which initially faced another direction as opposed to pacman.
+    To solve this, a re-model of Pacman would be necessary.
+
+
+
+ __________________________________________________
+ | ------------ TESTED ENVIRONMENTS ------------- |
+ --------------------------------------------------
+
+-- dev-computer: OS: Fedora 33 (Workstation Edition)
+                Host: 20LJS02W00 ThinkPad X380 Yoga
+                IDE: WebStorm
+                Browser: Firefox
+
+-- test-computer:
+--- dev-computer
+--- Macbook Pro, MacOS Monterey, Safari
+--- PC, Windows10, Firefox
+
+----> tested using a python server
+
+-- browsers used for testing:
+--- Mozilla Firefox for Fedora - 1.0 (93.0 (64-bit))
+--- Mozilla Firefox on Windows - 93.0
+--- Safari 15.1
+
+
+ ________________________________________
+ | ------------ RESOURCES ------------- |
+ ----------------------------------------
+
+-- I used several sources of information to learn about the mathematical concepts, WebGL and JavaScript, these include:
+--- same resources as lab1a, lab1b
+--- additionally, MDN docs regarding intersection tests: https://developer.mozilla.org/en-US/docs/Games/Techniques/3D_collision_detection
+--- additionally, loading textures (is implemented partly in shaders and shapes, usemtl was not implemented and hence is not used):
+        https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Using_textures_in_WebGL
+        https://webglfundamentals.org/webgl/lessons/webgl-3d-textures.html
+        https://stackoverflow.com/questions/25689183/webgl-use-both-texture-and-color-buffers
+
+
+ _____________________________________
+ | ------------ HOW TO ------------- |
+ -------------------------------------
+
+I am using fetch to load obj. files, so a webserver is needed.

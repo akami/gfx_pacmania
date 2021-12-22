@@ -5,6 +5,8 @@ let PHONG_VERTEX_SHADER_SOURCE = `
     attribute vec3 vertexColor;
     attribute vec3 vertexNormal;
     
+    attribute vec2 textureCoordinate;
+    
     uniform mat4 projectionMatrix;
     uniform mat4 viewMatrix;
     uniform mat4 worldMatrix;
@@ -21,6 +23,8 @@ let PHONG_VERTEX_SHADER_SOURCE = `
     
     varying vec4 fragmentColor;
     
+    varying vec2 v_textureCoordinate;
+    
     void main() {
         vec3 modelWorldPosition = (worldMatrix * modelMatrix * vec4(vertexPosition, 1.0)).xyz;
                 
@@ -34,5 +38,6 @@ let PHONG_VERTEX_SHADER_SOURCE = `
         pointToCameraVector = normalize(cameraWorldPosition - modelWorldPosition);
 
         fragmentColor = vec4(vertexColor, 1.0);
+        v_textureCoordinate = textureCoordinate;
     } 
 `;

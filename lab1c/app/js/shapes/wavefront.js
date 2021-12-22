@@ -35,7 +35,6 @@ class WaveFront extends Shape {
         return newVertices;
     }
 
-    // TODO documentation
     getNormals() {
         let {indices, normals} = this.parseSource();
 
@@ -53,7 +52,6 @@ class WaveFront extends Shape {
         return newNormals;
     }
 
-    // TODO documentation
     getColors() {
         let {colors, indices} = this.parseSource();
 
@@ -76,6 +74,25 @@ class WaveFront extends Shape {
         else return super.getColors();
     }
 
+    getTextureCoordinates() {
+        let {textureCoordinates, indices} = this.parseSource();
+
+        let newTextureCoordinates = [];
+        for (let i = 0; i < indices.length; i++) {
+            let triangle = [];
+            for (let j = 0; j < indices[i].length; j++) {
+                if (textureCoordinates.length > 0) {
+                    triangle.push(textureCoordinates[indices[i][j][1]]);
+                } else {
+                    triangle.push(indices[indices[1][1][1]]);
+                }
+            }
+            newTextureCoordinates.push(triangle);
+        }
+
+        return newTextureCoordinates;
+    }
+
     /**
      * This function converts the data in the obj. file to two arrays: vertices & indices.
      * @returns {{indices: *[], vertices: *[]}}
@@ -86,6 +103,7 @@ class WaveFront extends Shape {
         let vertices = [];
         let normals = [];
         let colors = [];
+        let textureCoordinates = [];
 
         let sourceLines = source.split("\n");
 
@@ -114,9 +132,11 @@ class WaveFront extends Shape {
 
                     indices.push(index);
                 }
+            } else if (sourceLineParts[0] === "vt") {
+                textureCoordinates.push([parseFloat(sourceLineParts[1]), parseFloat(sourceLineParts[2])]);
             }
         }
 
-        return {indices, vertices, normals, colors};
+        return {indices, vertices, normals, colors, textureCoordinates};
     }
 }

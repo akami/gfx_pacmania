@@ -22,8 +22,11 @@ function start() {
     let sphere = fetch("/assets/wavefronts/sphere.obj")
         .then(response => response.text());
 
+    let ghost = fetch("/assets/wavefronts/female-ghost.obj")
+        .then(response => response.text());
+
     // pass to main
-    Promise.all([pacmanTop, pacmanBottom, sphere]).then((sources) => main(sources));
+    Promise.all([pacmanTop, pacmanBottom, sphere, ghost]).then((sources) => main(sources));
 }
 
 function main(sources) {
@@ -34,6 +37,14 @@ function main(sources) {
     let pacman = new Pacman(context, [0, 0.5, 0], {shapeSources: {top: sources[0], bottom: sources[1]}});
     let camera = new Camera(context, [0., 10., 10.], pacman._position);
     let ground = new Ground(context, [0, -0.0001, 0]);
+    let ghost1 = new Ghost(context, [1.0, 0.5, 0.0], {
+        shapeSources: {ghost: sources[3]},
+        startDirection: Direction.EAST
+    });
+    let ghost2 = new Ghost(context, [-1.0, 0.5, 0.0], {
+        shapeSources: {ghost: sources[3]},
+        startDirection: Direction.WEST
+    });
 
     // setup lights
     let light = new Light([5.0, 10.0, 5.0]);
@@ -61,7 +72,8 @@ function main(sources) {
         light: light,
         ground: ground,
         food: food,
-        walls: walls
+        walls: walls,
+        ghosts: [ghost1, ghost2]
     });
 
     // set up ui controller
