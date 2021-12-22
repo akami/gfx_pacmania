@@ -81,8 +81,9 @@
       @see app/js/shapes/shape.js
       @see app/js/controller/render-controller.js
 
-    - Pacman opens or closes his mouth per tick. He also turns in one tick. This results in an animation that seems a
-      bit "jumpy" and not fluid.
+    - I had troubles implementing a fluid animation, since I had to use fractional movements (since one game tile is 1x1)
+      per game tick to achieve this. This results in Pacman's position to be slightly off sometimes due to the use of floats.
+      I tried to mitigate this in the game controller, but one can still slightly notice.
 
  |---- graphical aspects ----|
 
